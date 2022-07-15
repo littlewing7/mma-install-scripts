@@ -3,6 +3,7 @@
 # Script to kickstart my main production machine (Arch Linux).
 #
 # Author: David Anguita <david@davidanguita.name>
+# Personalization: from Massimo Manzato <massimo.manzato@gmail.com>
 #
 # Run me with:
 #
@@ -11,7 +12,9 @@
 set -e
 
 dotfiles_path="$HOME/workspace/dotfiles"
-dotfiles_repo_url="https://github.com/danguita/dotfiles.git"
+smart_bash_history_path="$HOME/smart-bash-history"
+dotfiles_path="$HOME/workspace/dotfiles"
+dotfiles_repo_url="https://github.com/littlewing7/dotfiles.git"
 dwm_download_url="https://dl.suckless.org/dwm"
 dwm_tar_name="dwm-6.2.tar.gz"
 

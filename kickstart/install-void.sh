@@ -3,6 +3,7 @@
 # Script to install my main production system (Void Linux).
 #
 # Author: David Anguita <david@davidanguita.name>
+# Personalization: from Massimo Manzato <massimo.manzato@gmail.com>
 #
 # Run me with:
 #
@@ -60,7 +61,7 @@ user=david
 xbps_repo_url=https://alpha.de.repo.voidlinux.org/current
 
 # Kickstart script. Can be left blank.
-kickstart_script_url=http://l.davidanguita.name/kickstart-void.sh
+kickstart_script_url=https://github.com/littlewing7/mma-install-scripts/blob/master/kickstart/kickstart-void.sh
 
 # Do not change these values unless you know what you're doing.
 boot_partition="${device}1" # Change it to "${device}p1" in NVMe drives.

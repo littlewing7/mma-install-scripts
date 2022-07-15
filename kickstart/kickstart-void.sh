@@ -3,6 +3,7 @@
 # Script to kickstart my main production machine (Void Linux).
 #
 # Author: David Anguita <david@davidanguita.name>
+# Personalization: from Massimo Manzato <massimo.manzato@gmail.com>
 #
 # Run me with:
 #
@@ -11,10 +12,12 @@
 set -e
 
 dotfiles_path="$HOME/workspace/dotfiles"
-dotfiles_repo_url="https://github.com/danguita/dotfiles.git"
-st_repo_url="https://github.com/danguita/st.git"
-dwm_repo_url="https://github.com/danguita/dwm.git"
-slstatus_repo_url="https://github.com/danguita/slstatus.git"
+smart_bash_history_path="$HOME/smart-bash-history"
+dotfiles_repo_url="https://github.com/littlewing7/mma-dotfiles.git"
+st_repo_url="https://github.com/littlewing7/st.git"
+dwm_repo_url="https://github.com/littlewing7/dwm.git"
+slstatus_repo_url="https://github.com/littlewing7/slstatus.git"
+smart_bash_history_repo_url="https://github.com/littlewing7/smart_bash_history.git"
 
 say() {
   printf "\n[$(date --iso-8601=seconds)] %b\n" "$1"
@@ -53,6 +56,11 @@ install_dotfiles() {
   git clone --recurse-submodules "$dotfiles_repo_url" "$dotfiles_path"
   make -C "$dotfiles_path" install
 }
+
+install_smart_bash_history() {
+  git clone "$smart_bash_history_repo_url" "$HOME"
+}
+
 
 update_dotfiles() {
   make -C "$dotfiles_path" update
@@ -132,7 +140,6 @@ main() {
     xdg-utils xdg-user-dirs xdg-dbus-proxy \
     xurls \
     dbus dbus-x11 \
-    elogind \
     polkit \
     acpi \
     wget \
@@ -153,7 +160,7 @@ main() {
     playerctl \
     ranger \
     w3m w3m-img \
-    linux5.10 linux5.10-headers \
+    linux linux-headers \
     linux-firmware linux-firmware-network wifi-firmware \
     fwupd \
     dunst \
@@ -184,7 +191,7 @@ main() {
     nodejs-lts \
     jq \
     rsync \
-    keepassxc \
+    pass \
     rclone \
     trayer-srg \
     fzf
@@ -201,16 +208,17 @@ main() {
   # Seat management.
   enable_service dbus
   enable_service polkitd
-  enable_service elogind
+  ## elogind BLOAT
+  #enable_service elogind
 
   # OpenSSH.
   install_package openssh
   enable_service sshd
 
-  # NetworkManager.
-  install_package NetworkManager NetworkManager-openvpn
-  enable_service NetworkManager
-  add_user_to_group network
+  # NetworkManager BLOAT! MMA: removed.
+  #install_package NetworkManager NetworkManager-openvpn
+  #enable_service NetworkManager
+  #add_user_to_group network
 
   # Docker.
   if confirm "Docker"; then
@@ -225,10 +233,16 @@ main() {
     sudo gem install bundler solargraph
   fi
 
-  # VirtualBox.
+  # VirtualBox .
   if confirm "VirtualBox"; then
     install_package virtualbox-ose
     add_user_to_group vboxusers
+  fi
+
+  # libvirt.
+  if confirm "libvirt and Virt Manager"; then
+    install_package libvirt virt-manager virt-manager-tools
+    add_user_to_group libvirt
   fi
 
   # Chromium.
@@ -291,7 +305,7 @@ main() {
   fi
 
   # Extra file system: NTFS.
-  if confirm "NTFS support"; then
+  if confirm "NTFS support ntfs-3g"; then
     install_package ntfs-3g
   fi
 
@@ -336,6 +350,12 @@ main() {
     install_dotfiles
   fi
 
+  # Install smart_bash_history .
+  if [ -d "$smart_bash_history_path" ]; then
+      say "Installing smart-bash-history"
+      install_smart_bash_history
+  fi
+
   # Install dwm (window manager).
   if [ -x "$(command -v dwm)" ]; then
     confirm "dwm found. Update?" && install_dwm
@@ -357,7 +377,7 @@ main() {
     install_slstatus
   fi
 
-  # Clean packages.
+  # Clean packages
   say "Cleaning things up"
   clean_packages
 

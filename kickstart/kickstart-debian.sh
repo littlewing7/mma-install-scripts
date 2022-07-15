@@ -2,8 +2,7 @@
 #
 # Script to kickstart my main production machine (Debian version).
 #
-# Author: David Anguita <david@davidanguita.name>
-#
+# Personalization: from Massimo Manzato <massimo.manzato@gmail.com>
 # Run me with:
 #
 #   ./kickstart-debian.sh
@@ -36,7 +35,7 @@ install_package() {
 
 install_dotfiles() {
   mkdir -p "$dotfiles_path"
-  git clone --recurse-submodules https://github.com/danguita/dotfiles.git "$dotfiles_path"
+  git clone --recurse-submodules https://github.com/littlewing7/dotfiles.git "$dotfiles_path"
   cd "$dotfiles_path" && make install
 }
 

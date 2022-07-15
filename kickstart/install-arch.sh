@@ -3,6 +3,7 @@
 # Script to install my main production system (Arch Linux).
 #
 # Author: David Anguita <david@davidanguita.name>
+# Personalization: from Massimo Manzato <massimo.manzato@gmail.com>
 #
 # Run me with:
 #
@@ -51,7 +52,7 @@ hostname=arch
 user=david
 
 # Kickstart script. Can be left blank.
-kickstart_script_url=http://l.davidanguita.name/kickstart-arch.sh
+kickstart_script_url=https://github.com/littlewing7/mma-install-scripts/blob/master/kickstart/kickstart-arch.sh
 
 # Do not change these values unless you know what you're doing.
 boot_partition="${device}1" # i.e. `/dev/sda1`
