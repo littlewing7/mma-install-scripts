@@ -59,7 +59,7 @@ install_dotfiles() {
 }
 
 install_smart_bash_history() {
-  git clone "$smart_bash_history_repo_url" "$HOME"
+  git clone "$smart_bash_history_repo_url" "$smart_bash_history_path"
 }
 
 
