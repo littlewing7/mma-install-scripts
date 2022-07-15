@@ -18,7 +18,7 @@ st_repo_url="https://github.com/littlewing7/st.git"
 dwm_repo_url="https://github.com/littlewing7/dwm.git"
 slstatus_repo_url="https://github.com/littlewing7/slstatus.git"
 smart_bash_history_path="$HOME/smart-bash-history"
-smart_bash_history_repo_url="https://github.com/littlewing7/smart_bash_history.git"
+smart_bash_history_repo_url="https://github.com/littlewing7/smart-bash-history.git"
 
 say() {
   printf "\n[$(date --iso-8601=seconds)] %b\n" "$1"
