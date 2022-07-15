@@ -17,6 +17,7 @@ dotfiles_repo_url="https://github.com/littlewing7/mma-dotfiles.git"
 st_repo_url="https://github.com/littlewing7/st.git"
 dwm_repo_url="https://github.com/littlewing7/dwm.git"
 slstatus_repo_url="https://github.com/littlewing7/slstatus.git"
+smart_bash_history_path="$HOME/smart-bash-history"
 smart_bash_history_repo_url="https://github.com/littlewing7/smart_bash_history.git"
 
 say() {
@@ -212,7 +213,7 @@ main() {
   #enable_service elogind
 
   # OpenSSH.
-  install_package openssh
+  install_package openssh keychain
   enable_service sshd
 
   # NetworkManager BLOAT! MMA: removed.
@@ -352,7 +353,9 @@ main() {
 
   # Install smart_bash_history .
   if [ -d "$smart_bash_history_path" ]; then
-      say "Installing smart-bash-history"
+      say "Already Installed smart-bash-history"
+  else
+      say "Installing smart-bash-history...."
       install_smart_bash_history
   fi
 
